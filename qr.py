@@ -1,4 +1,5 @@
 import qrcode
+from string import punctuation
 
 qr = qrcode.QRCode(
     version=1,
@@ -32,9 +33,6 @@ while qr_back not in colors:
 
 img = qr.make_image(fill_color=qr_color, back_color=qr_back)
 
-
-from string import punctuation
-punc = list(punctuation)
 
 title = ''
 for el in input_data[:50]:
