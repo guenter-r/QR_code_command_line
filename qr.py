@@ -1,3 +1,7 @@
+"""
+Just an quick implementation for a fully private QR code generator.
+"""
+
 import qrcode
 from string import punctuation
 
@@ -9,31 +13,32 @@ qr = qrcode.QRCode(
 )
 
 print('Text to QR-tify:')
-input_data = input();
+input_data = input()
 qr.add_data(input_data)
 qr.make(fit=True)
 print('select colors:\n(1)QR Code Color\n(2)Background color')
 
 
 
-colors = ['orange','red','blue','green','grey','black','white','mediumvioletred','tomato','brown','mediumseagreen','darkslategray','indigo','darksalmon','cyan','palevioletred','darkcyan','firebrick','darkolivegreen','forestgreen','darkslateblue','olive','greenyellow','lime','wheat','gold']
+colors = ['pink','orange','red','blue','green','grey','black','white','mediumvioletred','tomato','brown','mediumseagreen','darkslategray','indigo','darksalmon','cyan','palevioletred','darkcyan','firebrick','darkolivegreen','forestgreen','darkslateblue','olive','greenyellow','lime','wheat','gold']
 available = ', '.join(sorted(colors)).upper()
 
-print(f'Colors {available} can be selected.')
+print(f'Color ideas: {available}.')
 
 print('\nSelect code color:')
-qr_color = input()
-while qr_color not in colors:
-    qr_color = input()
+qr_color = input().lower()
+# while qr_color not in colors:
+    # qr_color = input()
 
 print('\nSelect background color:')
-qr_back = input()
-while qr_back not in colors:
-    qr_back = input()
+qr_back = input().lower()
+# while qr_back not in colors:
+#     qr_back = input()
 
+# create img file
 img = qr.make_image(fill_color=qr_color, back_color=qr_back)
 
-
+# Save file -> name from QR input
 title = ''
 for el in input_data[:50]:
     if el not in punctuation:
@@ -42,4 +47,5 @@ for el in input_data[:50]:
         else:
             title+='_'
 
+# Save QR code
 img.save(f'{title[:5]}.png')
